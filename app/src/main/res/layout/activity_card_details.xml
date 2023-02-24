@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="?colorPrimary"
+            app:titleTextColor="?colorSecondaryVariant" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/text_flavor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/big_dimen"
+                android:layout_marginTop="@dimen/default_dimen"
+                android:textAlignment="center"
+                android:textSize="@dimen/text_size_big"
+                android:textStyle="italic"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="It's not alive! IT'S NOT ALIIIIIVE!!!" />
+
+            <ImageView
+                android:id="@+id/image_card"
+                android:layout_width="220dp"
+                android:layout_height="300dp"
+                android:layout_marginStart="@dimen/small_dimen"
+                android:layout_marginTop="@dimen/small_dimen"
+                android:contentDescription="@string/content_description_card_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_flavor"
+                tools:background="@drawable/card_default" />
+
+            <include
+                android:id="@+id/cost"
+                layout="@layout/label_value_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/big_dimen"
+                android:layout_marginTop="@dimen/default_dimen"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/image_card" />
+
+            <include
+                android:id="@+id/attack"
+                layout="@layout/label_value_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x_small_dimen"
+                app:layout_constraintEnd_toEndOf="@id/cost"
+                app:layout_constraintStart_toStartOf="@id/cost"
+                app:layout_constraintTop_toBottomOf="@id/cost" />
+
+            <include
+                android:id="@+id/health"
+                layout="@layout/label_value_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x_small_dimen"
+                app:layout_constraintEnd_toEndOf="@id/cost"
+                app:layout_constraintStart_toStartOf="@id/cost"
+                app:layout_constraintTop_toBottomOf="@id/attack" />
+
+            <include
+                android:id="@+id/durability"
+                layout="@layout/label_value_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x_small_dimen"
+                app:layout_constraintEnd_toEndOf="@id/cost"
+                app:layout_constraintStart_toStartOf="@id/cost"
+                app:layout_constraintTop_toBottomOf="@id/health" />
+
+            <include
+                android:id="@+id/type"
+                layout="@layout/label_value_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x_small_dimen"
+                app:layout_constraintEnd_toEndOf="@id/cost"
+                app:layout_constraintStart_toStartOf="@id/cost"
+                app:layout_constraintTop_toBottomOf="@id/durability" />
+
+            <include
+                android:id="@+id/set"
+                layout="@layout/label_value_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x_small_dimen"
+                app:layout_constraintEnd_toEndOf="@id/cost"
+                app:layout_constraintStart_toStartOf="@id/cost"
+                app:layout_constraintTop_toBottomOf="@id/type" />
+
+            <include
+                android:id="@+id/faction"
+                layout="@layout/label_value_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x_small_dimen"
+                app:layout_constraintEnd_toEndOf="@id/cost"
+                app:layout_constraintStart_toStartOf="@id/cost"
+                app:layout_constraintTop_toBottomOf="@id/set" />
+
+            <include
+                android:id="@+id/rarity"
+                layout="@layout/label_value_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x_small_dimen"
+                app:layout_constraintEnd_toEndOf="@id/cost"
+                app:layout_constraintStart_toStartOf="@id/cost"
+                app:layout_constraintTop_toBottomOf="@id/faction" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</LinearLayout>
