@@ -10,6 +10,7 @@
         android:layout_width="160dp"
         android:layout_height="220dp"
         android:contentDescription="@string/content_description_card_image"
+        android:transitionName="@string/transition_card_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

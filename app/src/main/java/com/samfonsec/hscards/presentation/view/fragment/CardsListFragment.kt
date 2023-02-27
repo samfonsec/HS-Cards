@@ -5,16 +5,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
+import com.samfonsec.hscards.R
 import com.samfonsec.hscards.databinding.FragmentCardsListBinding
 import com.samfonsec.hscards.domain.model.Card
 import com.samfonsec.hscards.domain.utils.Constants.ARG_CARD
 import com.samfonsec.hscards.presentation.extension.hide
 import com.samfonsec.hscards.presentation.extension.show
 import com.samfonsec.hscards.presentation.view.activity.CardDetailActivity
+import com.samfonsec.hscards.presentation.view.activity.MainActivity
 import com.samfonsec.hscards.presentation.view.adapter.CardAdapter
 import com.samfonsec.hscards.presentation.viewModel.CardsViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -69,16 +73,22 @@ class CardsListFragment : Fragment() {
         with(binding) {
             recyclerviewCards.show()
             tabsClasses.show()
-            recyclerviewCards.adapter = CardAdapter {
-                onItemClicked(it)
+            recyclerviewCards.adapter = CardAdapter { card, imageView ->
+                onItemClicked(card, imageView)
             }.apply {
                 submitList(cards)
             }
         }
     }
 
-    private fun onItemClicked(card: Card) {
-        startActivity(Intent(context, CardDetailActivity::class.java).putExtra(ARG_CARD, card))
+    private fun onItemClicked(card: Card, imageView: ImageView) {
+        val options = ActivityOptionsCompat
+            .makeSceneTransitionAnimation(
+                activity as MainActivity,
+                imageView,
+                getString(R.string.transition_card_image)
+            )
+        startActivity(Intent(context, CardDetailActivity::class.java).putExtra(ARG_CARD, card), options.toBundle())
     }
 
     private fun onClassesLoaded(classes: List<String>) {

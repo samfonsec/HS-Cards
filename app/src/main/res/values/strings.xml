@@ -17,4 +17,8 @@
     <string name="label_set">Set</string>
     <string name="label_description">Card Text</string>
 
+    <string name="transition_card_image">Card</string>
+
+
+
 </resources>

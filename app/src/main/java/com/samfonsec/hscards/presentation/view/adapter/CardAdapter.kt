@@ -2,6 +2,7 @@ package com.samfonsec.hscards.presentation.view.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -10,7 +11,7 @@ import com.samfonsec.hscards.domain.model.Card
 import com.samfonsec.hscards.presentation.extension.loadImage
 
 class CardAdapter(
-    private val onItemClicked: (Card) -> Unit
+    private val onItemClicked: (Card, ImageView) -> Unit
 ) : ListAdapter<Card, CardAdapter.ViewHolder>(diffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -19,17 +20,19 @@ class CardAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        getItem(position).let { serie ->
-            holder.bind(serie)
-            holder.itemView.setOnClickListener { onItemClicked(serie) }
+        holder.bind(getItem(position)) { card, imageView ->
+            onItemClicked(card, imageView)
         }
     }
 
     class ViewHolder(private val binding: ItemCardBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(card: Card) {
+        fun bind(card: Card, onItemClicked: (Card, ImageView) -> Unit) {
             with(binding) {
                 imageCard.loadImage(card.img)
                 textName.text = card.name
+                itemView.setOnClickListener {
+                    onItemClicked(card, imageCard)
+                }
             }
         }
     }

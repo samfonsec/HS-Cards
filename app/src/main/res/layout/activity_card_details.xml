@@ -35,8 +35,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/big_dimen"
                 android:layout_marginTop="@dimen/default_dimen"
-                android:textSize="@dimen/text_size_medium"
                 android:textAlignment="center"
+                android:textSize="@dimen/text_size_medium"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Give all minions in your hand +1/+1.\nSpend 2 Corpses to give them +1/+1 more." />
 
@@ -46,6 +46,7 @@
                 android:layout_height="300dp"
                 android:layout_marginStart="@dimen/small_dimen"
                 android:contentDescription="@string/content_description_card_image"
+                android:transitionName="@string/transition_card_image"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/text_description"
@@ -138,9 +139,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/big_dimen"
                 android:layout_marginTop="@dimen/default_dimen"
+                android:layout_marginBottom="@dimen/default_dimen"
                 android:textAlignment="center"
                 android:textSize="@dimen/text_size_big"
                 android:textStyle="italic"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/rarity"
                 tools:text="It's not alive! IT'S NOT ALIIIIIVE!!!" />
 
