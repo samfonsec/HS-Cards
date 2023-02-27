@@ -8,6 +8,16 @@ class GetClassesUseCaseImpl(
 ) : GetClassesUseCase {
 
     override suspend fun execute(): DataResponse<List<String>> {
-        return infoRepository.getClasses()
+        val result = infoRepository.getClasses()
+        return if (result is DataResponse.Success)
+            DataResponse.Success(result.data.filterNot { it == DREAM || it == WHIZBANG })
+        else
+            result
     }
+
+    companion object {
+        private const val DREAM = "Dream"
+        private const val WHIZBANG = "Whizbang"
+    }
+
 }

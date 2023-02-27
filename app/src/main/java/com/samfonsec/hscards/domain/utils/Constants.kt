@@ -5,5 +5,5 @@ object Constants {
     const val API_TIME_OUT = 90L
 
     const val ARG_CARD = "card"
-    const val ARG_TITLE = "title"
+    const val CARDS_TABLE_NAME = "table_cards"
 }

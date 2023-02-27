@@ -30,27 +30,25 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/text_flavor"
+                android:id="@+id/text_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/big_dimen"
                 android:layout_marginTop="@dimen/default_dimen"
+                android:textSize="@dimen/text_size_medium"
                 android:textAlignment="center"
-                android:textSize="@dimen/text_size_big"
-                android:textStyle="italic"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="It's not alive! IT'S NOT ALIIIIIVE!!!" />
+                tools:text="Give all minions in your hand +1/+1.\nSpend 2 Corpses to give them +1/+1 more." />
 
             <ImageView
                 android:id="@+id/image_card"
                 android:layout_width="220dp"
                 android:layout_height="300dp"
                 android:layout_marginStart="@dimen/small_dimen"
-                android:layout_marginTop="@dimen/small_dimen"
                 android:contentDescription="@string/content_description_card_image"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_flavor"
+                app:layout_constraintTop_toBottomOf="@id/text_description"
                 tools:background="@drawable/card_default" />
 
             <include
@@ -133,6 +131,18 @@
                 app:layout_constraintEnd_toEndOf="@id/cost"
                 app:layout_constraintStart_toStartOf="@id/cost"
                 app:layout_constraintTop_toBottomOf="@id/faction" />
+
+            <TextView
+                android:id="@+id/text_flavor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/big_dimen"
+                android:layout_marginTop="@dimen/default_dimen"
+                android:textAlignment="center"
+                android:textSize="@dimen/text_size_big"
+                android:textStyle="italic"
+                app:layout_constraintTop_toBottomOf="@id/rarity"
+                tools:text="It's not alive! IT'S NOT ALIIIIIVE!!!" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

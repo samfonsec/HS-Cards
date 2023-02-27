@@ -15,5 +15,6 @@
     <string name="label_rarity">Rarity</string>
     <string name="label_faction">faction</string>
     <string name="label_set">Set</string>
+    <string name="label_description">Card Text</string>
 
 </resources>

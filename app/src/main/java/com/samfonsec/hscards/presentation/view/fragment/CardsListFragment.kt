@@ -5,17 +5,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
-import com.samfonsec.hscards.R
 import com.samfonsec.hscards.databinding.FragmentCardsListBinding
 import com.samfonsec.hscards.domain.model.Card
 import com.samfonsec.hscards.domain.utils.Constants.ARG_CARD
-import com.samfonsec.hscards.domain.utils.Constants.ARG_TITLE
 import com.samfonsec.hscards.presentation.extension.hide
 import com.samfonsec.hscards.presentation.extension.show
 import com.samfonsec.hscards.presentation.view.activity.CardDetailActivity
@@ -70,24 +66,19 @@ class CardsListFragment : Fragment() {
     }
 
     private fun onCardsLoaded(cards: List<Card>) {
-        binding.tabsClasses.show()
-        binding.recyclerviewCards.adapter = CardAdapter {
-            onItemClicked(it)
-        }.apply {
-            submitList(cards)
+        with(binding) {
+            recyclerviewCards.show()
+            tabsClasses.show()
+            recyclerviewCards.adapter = CardAdapter {
+                onItemClicked(it)
+            }.apply {
+                submitList(cards)
+            }
         }
     }
 
     private fun onItemClicked(card: Card) {
         startActivity(Intent(context, CardDetailActivity::class.java).putExtra(ARG_CARD, card))
-
-        /*findNavController().navigate(
-            R.id.action_cardsListFragment_to_cardDetailsFragment,
-            bundleOf(
-                ARG_CARD to card,
-                ARG_TITLE to card.name
-            )
-        )*/
     }
 
     private fun onClassesLoaded(classes: List<String>) {
@@ -101,7 +92,10 @@ class CardsListFragment : Fragment() {
     private fun onLoading(isLoading: Boolean) {
         with(binding) {
             progress.isVisible = isLoading
-            recyclerviewCards.isVisible = !isLoading
+            if (isLoading) {
+                errorView.root.hide()
+                recyclerviewCards.hide()
+            }
         }
     }
 

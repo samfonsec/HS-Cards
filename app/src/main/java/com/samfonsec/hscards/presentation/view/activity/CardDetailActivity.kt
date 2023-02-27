@@ -11,6 +11,7 @@ import com.samfonsec.hscards.databinding.LabelValueViewBinding
 import com.samfonsec.hscards.domain.model.Card
 import com.samfonsec.hscards.domain.utils.Constants
 import com.samfonsec.hscards.presentation.extension.loadImage
+import com.samfonsec.hscards.presentation.extension.setTextFromHtml
 
 class CardDetailActivity : AppCompatActivity() {
 
@@ -38,6 +39,7 @@ class CardDetailActivity : AppCompatActivity() {
             setSupportActionBar(toolbar)
             textFlavor.text = card.flavor
             imageCard.loadImage(card.img)
+            textDescription.setTextFromHtml(card.text.orEmpty())
             setLabelValue(cost, getString(R.string.label_cost), card.cost?.toString())
             setLabelValue(attack, getString(R.string.label_attack), card.attack?.toString())
             setLabelValue(health, getString(R.string.label_health), card.health?.toString())
@@ -47,7 +49,7 @@ class CardDetailActivity : AppCompatActivity() {
             setLabelValue(faction, getString(R.string.label_faction), card.faction)
             setLabelValue(set, getString(R.string.label_set), card.cardSet)
         }
-        setupActionBar(card.name)
+        setupActionBar(card.name.orEmpty())
     }
 
     private fun setLabelValue(lvBinding: LabelValueViewBinding, label: String, value: String?) {

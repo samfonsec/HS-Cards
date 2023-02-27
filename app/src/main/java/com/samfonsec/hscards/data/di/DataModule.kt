@@ -7,8 +7,10 @@ import com.google.gson.GsonBuilder
 import com.samfonsec.hscards.data.api.CardApi
 import com.samfonsec.hscards.data.api.InfoApi
 import com.samfonsec.hscards.data.api.NetworkInterceptor
-import com.samfonsec.hscards.data.dataSource.CardDataSource
+import com.samfonsec.hscards.data.dataSource.CardLocalDataSource
+import com.samfonsec.hscards.data.dataSource.CardRemoteDataSource
 import com.samfonsec.hscards.data.dataSource.InfoDataSource
+import com.samfonsec.hscards.data.database.CardDatabase
 import com.samfonsec.hscards.data.repository.CardDataRepository
 import com.samfonsec.hscards.data.repository.InfoDataRepository
 import com.samfonsec.hscards.domain.repository.CardRepository
@@ -60,9 +62,8 @@ val infoModule = module {
 
 val cardModule = module {
     single<CardApi> { get<Retrofit>().create(CardApi::class.java) }
-    single<CardRepository> { CardDataRepository(get()) }
-    single { CardDataSource(get()) }
+    single { CardDatabase.getInstance(androidContext()).cardDao() }
+    single<CardRepository> { CardDataRepository(get(), get()) }
+    single { CardRemoteDataSource(get()) }
+    single { CardLocalDataSource(get()) }
 }
-
-
-

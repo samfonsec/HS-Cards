@@ -12,4 +12,5 @@ ext {
     retrofit_version = '2.9.0'
     log_interceptor_version = '4.10.0'
     glide_version = '4.14.2'
+    room_version = '2.5.0'
 }

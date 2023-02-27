@@ -8,7 +8,19 @@ class GetCardsUseCaseImpl(
     private val cardRepository: CardRepository
 ) : GetCardsUseCase {
 
+    private val excludedTypes = listOf(HERO, HERO_POWER)
+
     override suspend fun execute(className: String): DataResponse<List<Card>> {
-        return cardRepository.getCards(className)
+        val result = cardRepository.getCards(className)
+        return if (result is DataResponse.Success)
+            DataResponse.Success(result.data.filterNot { excludedTypes.contains(it.type) })
+        else
+            result
+    }
+
+
+    companion object {
+        private const val HERO = "Hero"
+        private const val HERO_POWER = "Hero Power"
     }
 }
