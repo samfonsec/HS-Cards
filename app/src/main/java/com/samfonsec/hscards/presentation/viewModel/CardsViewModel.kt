@@ -31,8 +31,6 @@ class CardsViewModel constructor(
 
     private var currentJob: Job? = null
 
-    var selectedTab = 0
-
     fun getClasses() = viewModelScope.launch {
         _onLoading.value = true
         getClassesUseCase.execute().let { result ->

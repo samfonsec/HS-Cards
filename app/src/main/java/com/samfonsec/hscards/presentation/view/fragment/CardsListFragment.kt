@@ -1,12 +1,12 @@
 package com.samfonsec.hscards.presentation.view.fragment
 
+import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayout
@@ -29,6 +29,7 @@ class CardsListFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: CardsViewModel by viewModel()
+    private var currentClass = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,7 +51,7 @@ class CardsListFragment : Fragment() {
     private fun setupView() {
         binding.tabsClasses.addOnTabSelectedListener(object : OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
-                viewModel.selectedTab = tab.position
+                currentClass = tab.text?.toString().orEmpty()
                 loadCards()
             }
 
@@ -82,13 +83,16 @@ class CardsListFragment : Fragment() {
     }
 
     private fun onItemClicked(card: Card, imageView: ImageView) {
-        val options = ActivityOptionsCompat
+        val options = ActivityOptions
             .makeSceneTransitionAnimation(
                 activity as MainActivity,
                 imageView,
                 getString(R.string.transition_card_image)
             )
-        startActivity(Intent(context, CardDetailActivity::class.java).putExtra(ARG_CARD, card), options.toBundle())
+        startActivity(
+            Intent(context, CardDetailActivity::class.java).putExtra(ARG_CARD, card),
+            options.toBundle()
+        )
     }
 
     private fun onClassesLoaded(classes: List<String>) {
@@ -122,11 +126,8 @@ class CardsListFragment : Fragment() {
     }
 
     private fun loadCards() {
-        val selectedClass = currentTab()?.text.toString()
-        viewModel.getCards(selectedClass)
+        viewModel.getCards(currentClass)
     }
-
-    private fun currentTab() = binding.tabsClasses.getTabAt(viewModel.selectedTab)
 
     override fun onDestroyView() {
         super.onDestroyView()
