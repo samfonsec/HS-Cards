@@ -18,7 +18,6 @@ class GetCardsUseCaseImpl(
             result
     }
 
-
     companion object {
         private const val HERO = "Hero"
         private const val HERO_POWER = "Hero Power"
