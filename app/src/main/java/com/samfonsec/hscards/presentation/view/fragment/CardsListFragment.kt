@@ -2,6 +2,9 @@ package com.samfonsec.hscards.presentation.view.fragment
 
 import android.app.ActivityOptions
 import android.content.Intent
+import android.content.res.Configuration
+import android.content.res.Configuration.ORIENTATION_LANDSCAPE
+import android.content.res.Configuration.ORIENTATION_PORTRAIT
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.samfonsec.hscards.R
@@ -30,6 +34,9 @@ class CardsListFragment : Fragment() {
 
     private val viewModel: CardsViewModel by viewModel()
     private var currentClass = ""
+    private val gridLayoutManager by lazy {
+        GridLayoutManager(context, PORTRAIT_SPAN_COUNT)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,7 +55,16 @@ class CardsListFragment : Fragment() {
         }
     }
 
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        if (newConfig.orientation == ORIENTATION_LANDSCAPE)
+            gridLayoutManager.spanCount = LANDSCAPE_SPAN_COUNT
+        else if (newConfig.orientation == ORIENTATION_PORTRAIT)
+            gridLayoutManager.spanCount = PORTRAIT_SPAN_COUNT
+    }
+
     private fun setupView() {
+        binding.recyclerviewCards.layoutManager = gridLayoutManager
         binding.tabsClasses.addOnTabSelectedListener(object : OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 currentClass = tab.text?.toString().orEmpty()
@@ -132,5 +148,10 @@ class CardsListFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    companion object {
+        private const val PORTRAIT_SPAN_COUNT = 2
+        private const val LANDSCAPE_SPAN_COUNT = 4
     }
 }

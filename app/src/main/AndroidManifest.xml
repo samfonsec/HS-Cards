@@ -16,6 +16,7 @@
         android:theme="@style/Theme.HearthstoneCards"
         tools:targetApi="31">
         <activity
+            android:configChanges="orientation|screenSize"
             android:name=".presentation.view.activity.MainActivity"
             android:exported="true">
             <intent-filter>
